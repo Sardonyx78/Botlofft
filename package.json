@@ -1,0 +1,17 @@
+{
+  "name": "botlofft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "author": "Sardonyx78 <sardonyx@sardonyx.me>",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm i -D && tsc && node ."
+  },
+  "devDependencies": {
+    "@types/node": "^14.10.1"
+  },
+  "dependencies": {
+    "tslib": "^2.0.1"
+  }
+}
