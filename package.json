@@ -9,9 +9,20 @@
     "start": "npm i -D && tsc && node ."
   },
   "devDependencies": {
-    "@types/node": "^14.10.1"
+    "@types/node": "^14.10.1",
+    "@types/redis": "^2.8.27"
   },
   "dependencies": {
+    "@discordjs/opus": "^0.3.2",
+    "@types/mathjs": "^6.0.5",
+    "@types/mongoose": "^5.7.36",
+    "discord.js": "^12.3.1",
+    "mathjs": "^7.2.0",
+    "moment": "^2.28.0",
+    "mongoose": "^5.10.5",
+    "redis": "^3.0.2",
+    "svg-captcha": "^1.4.0",
+    "svg2img": "^0.8.1",
     "tslib": "^2.0.1"
   }
 }
