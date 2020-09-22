@@ -14,7 +14,7 @@ export class MessageDeleteEvent implements DiscordEvent {
 
           const by = log.target === message.author && message.createdAt < log.createdAt ? log.executor : null
 
-          client.channels.cache.get<TextChannel>("720712119808557147").send(
+          client.channels.cache.get<TextChannel>("754876773342380113").send(
                new MessageEmbed()
                     .setColor(0xe74c3c)
                     .setAuthor(
