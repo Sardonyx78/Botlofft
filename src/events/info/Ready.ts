@@ -19,7 +19,12 @@ export class ReadyEvent implements DiscordEvent {
 
           const newComers = (await (<TextChannel>client.channels.cache.get("754319043057680485")).messages.fetch("754340230890258532", true)).createReactionCollector((reaction: MessageReaction, user: User) => client.guild.member(user).joinedAt.valueOf() < 1599918561444 && !client.guild.member(user).roles.cache.has("622344228760059946") && reaction.emoji.name === "✅")
 
-          newComers.on("collect", (reaction, user) => client.guild.member(user).roles.add("622344228760059946"))
+          newComers.on("collect", (reaction, user) => {
+               const member = client.guild.member(user)
+               member.roles.add("622344228760059946")
+               //@ts-ignore
+               client.emit("guildMemberAdd", member, true)
+          })
 
           client.channels.cache.get<TextChannel>("754335732482572288").messages.fetch({ limit: 100 }, true)
 
