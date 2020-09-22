@@ -30,7 +30,7 @@ export class MessageDeleteEvent implements DiscordEvent {
           );
 
           if (message.attachments.size !== 0) {
-               client.channels.cache.get<TextChannel>("754330083019325480").send(new MessageAttachment(client.cache[message.id].img, client.cache[message.id].name))
+               client.channels.cache.get<TextChannel>("754876773342380113").send(new MessageAttachment(client.cache[message.id].img, client.cache[message.id].name))
                Object.assign(client.cache[message.id], undefined)
          }
      }

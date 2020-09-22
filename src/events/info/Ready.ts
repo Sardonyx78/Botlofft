@@ -27,6 +27,15 @@ export class ReadyEvent implements DiscordEvent {
                if (x.expires <= Date.now()) muteCb(x, x.discord_id)
                else client.setTimeout(muteCb, x.expires - Date.now(), x, x.discord_id)
           })
+
+          setInterval(async () => {
+               const rekorKanalı = client.guild.channels.cache.get("757834749703356487")
+               const currRekor = parseInt(rekorKanalı.name.split(" • ")[1])
+
+               await client.guild.channels.cache.get("757834477601816596").edit({ name: `Toplam Üye • ${client.guild.members.cache.size}` })
+               await client.guild.channels.cache.get("757834519909892147").edit({ name: `Toplam Online • ${client.guild.members.cache.filter(x => x.presence.status !== "offline").size}` })
+               await rekorKanalı.edit({ name: `Rekor Online • ${parseInt(rekorKanalı.name.split(" • ")[1]) > client.guild.members.cache.filter(x => x.presence.status !== "offline").size ? currRekor : client.guild.members.cache.filter(x => x.presence.status !== "offline").size}` })
+          }, 50000)
      }
 }
 

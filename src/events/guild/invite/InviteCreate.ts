@@ -9,6 +9,9 @@ export class InviteCreateEvent implements DiscordEvent {
 
      async handle(invite: Invite) {
           if (invite.inviter.id !== client.user.id) client.invites.set(invite.code, invite)
+          if (invite.expiresAt) setTimeout(() => {
+               client.invites.delete(invite.code)
+          }, invite.expiresAt.valueOf() - Date.now())
      }
 }
 

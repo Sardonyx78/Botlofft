@@ -20,12 +20,9 @@ export class GuildMemberAdd implements DiscordEvent {
 
           const newInvites = await client.guild.fetchInvites()
 
-          const inviteCode = await new Promise((resolve) => newInvites.map(x => ({ code: x.code, uses: x.uses, inviter: x.inviter })).forEach(y => {
-               const res = olds.find(x => {
-                    if (x.code === y.code && x.uses !== y.uses) return true
-                    else return false
-               })
-               if (res) resolve(res.code)
+          const inviteCode = await new Promise((resolve) => olds.forEach(y => {
+               const res = !newInvites.map(x => ({ code: x.code, uses: x.uses, inviter: x.inviter })).includes(y)
+               if (res) resolve(y.code)
           })) as string
 
           const inv = client.invites.get(inviteCode).linked ? client.invites.get(inviteCode).linkedTo : client.invites.get(inviteCode)
