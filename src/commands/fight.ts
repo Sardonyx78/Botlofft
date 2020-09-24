@@ -15,7 +15,7 @@ const emojis = [
     "758566023963344906"
 ]
 
-export = class Fight implements Command {
+export class Fight implements Command {
     info: { args: { title: string; optional: boolean; type: "number" | "mention" | 'string'; }[]; cmd: string; perms: import("../constants/Perms").default[]; roles: string[]; desc: string; };
 
     constructor(){
@@ -35,7 +35,7 @@ export = class Fight implements Command {
         const member = message.mentions.members.first()
         const msg = await message.channel.send(`${member} savaş isteğini kabul ediyor musun?`)
         await msg.react('✅')
-        await msg.react('724598686268653659')
+        await msg.react('754821689262735403')
 
         msg.awaitReactions((r: MessageReaction, u: User) => (r.emoji.id === '724598686268653659' || r.emoji.name === "✅") && u === member.user, { max: 1, time: 30000, errors: ['time']}).then(x => {
             msg.reactions.removeAll()
@@ -135,3 +135,5 @@ export = class Fight implements Command {
             })
     }
 }
+
+client.commands.set("fight", new Fight())
