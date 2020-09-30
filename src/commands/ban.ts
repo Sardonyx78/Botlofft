@@ -21,7 +21,7 @@ export class Ban implements Command {
                }],
                cmd: "ban",
                perms: [],
-               roles: ['754324701731487764'],
+               roles: ['760221558190506004'],
                desc: "Kişiyi banlar."
           }
      }
@@ -39,7 +39,7 @@ export class Ban implements Command {
           if (!user) return message.channel.send("\\❌ Kullanıcı bulunamadı.")
 
           if (user.bot) return message.channel.send("\\❌ Kullanıcı bot.")
-          if (client.guild.member(user).roles.cache.has("754324701731487764")) return message.channel.send("\\❌ Kullanıcı bir yetkili.")
+          if (client.guild.member(user).roles.cache.has("760221558190506004")) return message.channel.send("\\❌ Kullanıcı bir yetkili.")
 
           const logRoom = client.channels.cache.get<TextChannel>("754335732482572288")
 

@@ -14,7 +14,7 @@ export class Clear implements Command {
                }],
                cmd: "clear",
                perms: [],
-               roles: ['754324701731487764'],
+               roles: ['760221558190506004'],
                desc: "Yazıları temizler."
           }
      }

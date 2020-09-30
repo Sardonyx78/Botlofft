@@ -90,8 +90,8 @@ export async function createMuteTimeout(user: string, expiration: Date) {
 export function muteCb(doc: mute, user: string) {
     const m = client.guild.member(user)
     if (m) {
-        if (m.roles.cache.has("754323794180440094")) m.roles.add("622344228760059946").catch(() => {})
-        m.roles.remove("754323794180440094").catch(() => {})
+        if (m.roles.cache.has("622344228760059946")) m.roles.add("622344228760059946").catch(() => {})
+        m.roles.remove("622344228760059946").catch(() => {})
     }
     doc.deleteOne()
 }

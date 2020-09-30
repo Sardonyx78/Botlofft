@@ -27,7 +27,7 @@ export class Mute implements Command {
                }],
                cmd: "mute",
                perms: [],
-               roles: ['754324701731487764'],
+               roles: ['760221558190506004'],
                desc: "Kişiyi mutelar."
           }
      }
@@ -51,7 +51,7 @@ export class Mute implements Command {
           if (!user) return message.channel.send("\\❌ Kullanıcı bulunamadı.")
 
           if (user.bot) return message.channel.send("\\❌ Kullanıcı bot.")
-          if (client.guild.member(user).roles.cache.has("754324701731487764")) return message.channel.send("\\❌ Kullanıcı bir yetkili.")
+          if (client.guild.member(user).roles.cache.has("760221558190506004")) return message.channel.send("\\❌ Kullanıcı bir yetkili.")
 
           const logRoom = client.channels.cache.get<TextChannel>("754335732482572288")
 
@@ -74,7 +74,7 @@ export class Mute implements Command {
 
                          await user.send(`Karma Communityden **${args.slice(3).join(" ")}** sebebiyle mutelandınız. **${capitilizeFirstLetter(moment(date).locale("tr-TR").calendar())}**'e kadar.`).catch(() => { })
 
-                         await client.guild.member(user).roles.add("754323794180440094")
+                         await client.guild.member(user).roles.add("760733882458570762")
                          await client.guild.member(user).roles.remove("622344228760059946")
 
                          createMuteTimeout(user.id, date)

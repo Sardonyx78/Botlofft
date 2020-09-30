@@ -8,6 +8,7 @@ export class GuildMemberRemove implements DiscordEvent {
 
 
      handle(member: GuildMember) {
+          if (!member.roles.cache.has("622344228760059946") && !member.roles.cache.has("622344228760059946")) return;
           (<TextChannel>client.guild.channels.cache.get("754355939272032408")).send(new MessageEmbed().setAuthor(`${member.user.tag} (${member.id})`, member.user.displayAvatarURL({ dynamic: true })).setColor(0xe74c3c).setTimestamp())
      }
 }

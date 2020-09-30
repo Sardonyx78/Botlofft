@@ -21,7 +21,7 @@ export class Düzenle implements Command {
                }],
                cmd: "ban",
                perms: [],
-               roles: ['754324701731487764'],
+               roles: ['760221558190506004'],
                desc: "Kişiyi banlar."
           }
      }
