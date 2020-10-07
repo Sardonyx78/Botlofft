@@ -37,7 +37,7 @@ export class GuildMemberAdd implements DiscordEvent {
      async handle(member: GuildMember, prev: boolean) {
           if (member.user.bot) return  (<TextChannel>client.guild.channels.cache.get("754355939272032408")).send(new MessageEmbed().setAuthor(`${member.user.tag} (${member.id})`, member.user.displayAvatarURL({ dynamic: true })).setColor(0x3ed878).setTimestamp())
 
-          const { data: svg, text: answer } = svgcaptcha.create({ background: "#000", color: true })
+          const { data: svg, text: answer } = svgcaptcha.create({ background: "#000" })
 
           if (member.roles.cache.has("622344228760059946") || prev) {
                const canvas = await constructCanvas(member)
@@ -54,7 +54,7 @@ export class GuildMemberAdd implements DiscordEvent {
                member.kick("Dogrulama başarısız")
           }, 20000);
 
-          (await member.createDM()).awaitMessages(() => true, { max: 1, time: 20000 }).then(async x => {
+          (await member.createDM()).awaitMessages(m => m.author.id === member.id, { max: 1, time: 20000 }).then(async x => {
                const msg = x.first()
 
                clearTimeout(kickTimer)
