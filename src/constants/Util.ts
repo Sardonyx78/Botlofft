@@ -84,14 +84,14 @@ loadDir("../events", require)
 
 export async function createMuteTimeout(user: string, expiration: Date) {
     const doc = await client.database.mute.create({ discord_id: user, expires: expiration.valueOf() })
-    client.setTimeout(muteCb, expiration.valueOf() - Date.now(), doc, user)
+    client.setTimeout(() => muteCb(doc, user), expiration.valueOf() - Date.now())
 }
 
 export function muteCb(doc: mute, user: string) {
     const m = client.guild.member(user)
     if (m) {
-        if (m.roles.cache.has("622344228760059946")) m.roles.add("622344228760059946").catch(() => {})
-        m.roles.remove("622344228760059946").catch(() => {})
+        if (!m.roles.cache.has("622344228760059946")) m.roles.add("622344228760059946").catch(() => {})
+        m.roles.remove("760733882458570762").catch(() => {})
     }
     doc.deleteOne()
 }

@@ -27,7 +27,7 @@ export class Mute implements Command {
                }],
                cmd: "mute",
                perms: [],
-               roles: ['760221558190506004'],
+               roles: ['760221275875704863', "760221554663096360", "760221268708163635", "760221026667331604"],
                desc: "Kişiyi mutelar."
           }
      }

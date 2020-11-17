@@ -21,7 +21,7 @@ export class SoftBan implements Command {
                }],
                cmd: "softban",
                perms: [],
-               roles: ['760221558190506004'],
+               roles: ["760221554663096360", "760221268708163635", "760221026667331604"],
                desc: "Kişiyi softbanlar."
           }
      }
@@ -60,7 +60,7 @@ export class SoftBan implements Command {
 
                          logRoom.send({ embed: new MessageEmbed().setColor(0xef984b).addFields([{ name: 'Vaka', value: `**#${await redisIncr("last_case")}**`, inline: true }, { name: 'Yetkili', value: `${message.author}`, inline: true }, { name: 'Aksiyon', value: 'Softban', inline: true }, { name: 'Sebep', value: `\`\`\`\n${args.slice(2).join(" ")}\n\`\`\``, inline: true }]).setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL({ dynamic: true })) }).then(async v => redisSet(await redisGet("last_case"), v.id))
 
-                         await user.send(`Karma Communityden **${args.slice(2).join(" ")}** sebebiyle softbanlandınız. Geri girebilirsiniz`).catch(() => { })
+                         await user.send(`Karma Communityden **${args.slice(2).join(" ")}** sebebiyle softbanlandınız. Geri girebilirsiniz.\nhttps://discord.gg/kmqpDXVwqX`).catch(() => { })
 
                          await client.guild.members.ban(user, { days: 7 })
                          await client.guild.members.unban(user, "Softban")

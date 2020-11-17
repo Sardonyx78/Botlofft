@@ -1,10 +1,9 @@
 import Command from '../constants/Command';
-import Perms from '../constants/Perms';
 import { GuildMember, MessageEmbed, MessageReaction, TextChannel, User } from 'discord.js';
 import client from '..';
 import { redisGet, redisIncr, redisSet } from '../constants/Util';
 
-export class Ban implements Command {
+export class Kick implements Command {
      info: { args: { title: string; optional: boolean; type: "number" | "mention" | 'string'; }[]; cmd: string; perms: import("../constants/Perms").default[]; roles: string[]; desc: string; };
 
      constructor() {
@@ -19,10 +18,10 @@ export class Ban implements Command {
                     optional: false,
                     type: "string"
                }],
-               cmd: "ban",
+               cmd: "kick",
                perms: [],
-               roles: ['760221026667331604'],
-               desc: "Kişiyi banlar."
+               roles: ["760221554663096360", "760221268708163635", "760221026667331604"],
+               desc: "Kişiyi kickler."
           }
      }
 
@@ -45,9 +44,9 @@ export class Ban implements Command {
 
           const modLog = await client.database.moderation.findOne({ discord_id: user.id }) || { kicks: 0, bans: 0, warns: 0, mutes: 0, discord_id: user.id }
 
-          message.channel.send(new MessageEmbed().setDescription("Banlamak istediğinize emin misiniz?\n```\n" + args.slice(2).join(" ") + "\n```").setColor(0xe74c3c).setAuthor(`${user.tag} (${user.id})`, user.avatarURL({ dynamic: true })).setFooter(`Warn: ${modLog.warns} • Mute: ${modLog.mutes} • Kick: ${modLog.kicks} • Ban: ${modLog.bans}`)).then(async x => {
+          message.channel.send(new MessageEmbed().setDescription("Kicklemek istediğinize emin misiniz?\n```\n" + args.slice(2).join(" ") + "\n```").setColor(0xef984b).setAuthor(`${user.tag} (${user.id})`, user.avatarURL({ dynamic: true })).setFooter(`Warn: ${modLog.warns} • Mute: ${modLog.mutes} • Kick: ${modLog.kicks} • Ban: ${modLog.bans}`)).then(async x => {
                await x.react("✅")
-               await x.react("754821689262735403")
+               await x.react("760221268708163635")
 
                x.awaitReactions((reaction: MessageReaction, user: User) => user === message.author && ["white_cross", "✅"].includes(reaction.emoji.name), { max: 1, time: 15000, errors: ["time"] }).then(async y => {
                     const accepted = y.first().emoji.id !== "754821689262735403"
@@ -56,13 +55,13 @@ export class Ban implements Command {
 
                          x.reactions.removeAll()
 
-                         x.edit(new MessageEmbed().setTitle("Ban!").setDescription("\n```\n" + args.slice(2).join(" ") + "\n```").setColor(0xe74c3c).setAuthor(`${user.tag} (${user.id})`, user.avatarURL({ dynamic: true })).setFooter(`Warn: ${modLog.warns} • Mute: ${modLog.mutes} • Kick: ${modLog.kicks} • Ban: ${modLog.bans + 1}`))
+                         x.edit(new MessageEmbed().setTitle("Kick!").setDescription("\n```\n" + args.slice(2).join(" ") + "\n```").setColor(0xef984b).setAuthor(`${user.tag} (${user.id})`, user.avatarURL({ dynamic: true })).setFooter(`Warn: ${modLog.warns} • Mute: ${modLog.mutes} • Kick: ${modLog.kicks} • Ban: ${modLog.bans + 1}`))
 
-                         logRoom.send({ embed: new MessageEmbed().setColor(0xe74c3c).addFields([{ name: 'Vaka', value: `**#${await redisIncr("last_case")}**`, inline: true }, { name: 'Yetkili', value: `${message.author}`, inline: true }, { name: 'Aksiyon', value: 'Ban', inline: true }, { name: 'Sebep', value: `\`\`\`\n${args.slice(2).join(" ")}\n\`\`\``, inline: true }]).setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL({ dynamic: true })) }).then(async v => redisSet(await redisGet("last_case"), v.id))
+                         logRoom.send({ embed: new MessageEmbed().setColor(0x6884c6).addFields([{ name: 'Vaka', value: `**#${await redisIncr("last_case")}**`, inline: true }, { name: 'Yetkili', value: `${message.author}`, inline: true }, { name: 'Aksiyon', value: 'Kick', inline: true }, { name: 'Sebep', value: `\`\`\`\n${args.slice(2).join(" ")}\n\`\`\``, inline: true }]).setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL({ dynamic: true })) }).then(async v => redisSet(await redisGet("last_case"), v.id))
 
-                         await user.send(`Karma Communityden **${args.slice(2).join(" ")}** sebebiyle banlandınız. Banınızın haksız olduğunu düşünüyorsanız bu formu doldurun:\nhttps://bit.ly/3iuPePd`).catch(() => { })
+                         await user.send(`Karma Communityden **${args.slice(2).join(" ")}** sebebiyle kicklendiniz. Geri girebilirsiniz.\nhttps://discord.gg/kmqpDXVwqX`).catch(() => { })
 
-                         client.guild.members.ban(user, { days: 7 })
+                         await client.guild.member(user).kick()
 
                          if (modLog.kicks === 0 && modLog.bans === 0 && modLog.mutes === 0 && modLog.warns === 0){
                               await client.database.moderation.create({ kicks: 0, bans: 1, warns: 0, mutes: 0, discord_id: user.id })
@@ -83,4 +82,4 @@ export class Ban implements Command {
      };
 }
 
-client.commands.set("ban", new Ban())
+client.commands.set("kick", new Kick())

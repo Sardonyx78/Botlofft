@@ -15,7 +15,7 @@ export class Info implements Command {
                }],
                cmd: "info",
                perms: [Perms.SEND_MESSAGES],
-               roles: ['574331102383046669'],
+               roles: [],
                desc: "Kişi hakkındaki bilgileri gösterir."
           }
      }
