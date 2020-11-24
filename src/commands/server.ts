@@ -1,12 +1,12 @@
 import Command from '../constants/Command';
 import Perms from '../constants/Perms';
-import query, { players } from "source-server-query";
+import query from "source-server-query";
 import client from '..';
 import { MessageEmbed } from 'discord.js';
 
 const server = {
-     ip: "78.46.21.247",
-     port: 27015
+     ip: "185.122.202.139",
+     port: 27024
 }
 
 export class Server implements Command {
@@ -35,7 +35,7 @@ export class Server implements Command {
           }
 
           if (!serverInfo || serverInfo instanceof Error) {
-               message.channel.send(new MessageEmbed().setAuthor("Karma Hogwarts RolePlay", client.guild.iconURL({ dynamic: true })).setColor(0x808080)
+               message.channel.send(new MessageEmbed().setAuthor("Karma DarkRP", client.guild.iconURL({ dynamic: true })).setColor(0x808080)
                     .setURL(`https://steam.sardonyx.studio/${server.ip}/${server.port}`)
                     .setTitle(">> Bağlanmak İçin Tıkla <<")
                     .addField(`\\🌐 | IP`, `${server.ip}:${server.port}`, true)
@@ -45,7 +45,7 @@ export class Server implements Command {
                     .addField("\\🎮 | Durum", "\\😴 Sunucu Offline", true)
                     .addField("­", "­", true))
           } else {
-               message.channel.send(new MessageEmbed().setAuthor("Karma Hogwarts RolePlay", client.guild.iconURL({ dynamic: true }))
+               message.channel.send(new MessageEmbed().setAuthor("Karma DarkRP", client.guild.iconURL({ dynamic: true }))
                     .setURL(`https://steam.sardonyx.studio/${server.ip}/${server.port}`)
                     .setTitle(">> Bağlanmak İçin Tıkla <<")
                     .addField(`\\🌐 | IP`, `${server.ip}:${server.port}`, true)
@@ -60,3 +60,4 @@ export class Server implements Command {
 }
 
 client.commands.set("server", new Server())
+client.commands.set("sunucu", new Server())

@@ -1,5 +1,5 @@
 import { createCanvas, loadImage } from 'canvas'
-import { GuildMember, MessageReaction, ReactionCollector, TextChannel, User } from 'discord.js'
+import { GuildMember, MessageAttachment, MessageEmbed, MessageReaction, ReactionCollector, TextChannel, User } from 'discord.js'
 import { join } from 'path'
 import client from '../..'
 import DiscordEvent from "../../constants/DiscordEvent"
@@ -10,7 +10,7 @@ async function constructCanvas(member: GuildMember) {
      const canvas = createCanvas(1600, 900)
      const ctx = canvas.getContext("2d")
 
-     ctx.drawImage(await loadImage(join(__dirname, "../../../../assets/giris.png")), 0, 0, 1600, 900)
+     ctx.drawImage(await loadImage(join(__dirname, "../../../assets/giris.png")), 0, 0, 1600, 900)
 
      ctx.fillStyle = '#ffffff';
      ctx.font = "350px \"Magic School One\"";
@@ -47,7 +47,10 @@ export class ReadyEvent implements DiscordEvent {
 
                const doc = await client.database.mute.findOne({ discord_id: member.id })
                if (doc) member.roles.add("760733882458570762")
-               else member.roles.add("622344228760059946")
+               else {
+                    member.roles.add("622344228760059946")
+                    client.channels.cache.get<TextChannel>("756952147169378315").send(member.toString(), { embed: new MessageEmbed().setColor("RANDOM").setDescription(`<a:blob_dance:757886155709612054> ${member} Karma Community'e hoşgeldin ! <a:blob_dance:757886155709612054>`).setImage("attachment://welcome.png"), files: [ new MessageAttachment((await constructCanvas(member)).toBuffer(), "welcome.png") ] })
+               }
           })
 
           client.channels.cache.get<TextChannel>("754335732482572288").messages.fetch({ limit: 100 }, true)
