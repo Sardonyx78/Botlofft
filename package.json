@@ -9,15 +9,19 @@
     "start": "npm i -D && tsc && node ."
   },
   "devDependencies": {
+    "@types/gamedig": "^2.0.1",
+    "@types/mathjs": "^6.0.5",
+    "@types/mongoose": "^5.7.36",
     "@types/node": "^14.10.1",
     "@types/redis": "^2.8.27"
   },
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
-    "@types/mathjs": "^6.0.5",
-    "@types/mongoose": "^5.7.36",
+    "@types/express": "^4.17.9",
     "canvas": "^2.6.1",
     "discord.js": "^12.3.1",
+    "express": "^4.17.1",
+    "gamedig": "^2.0.23",
     "mathjs": "^7.2.0",
     "moment": "^2.28.0",
     "mongoose": "^5.10.5",

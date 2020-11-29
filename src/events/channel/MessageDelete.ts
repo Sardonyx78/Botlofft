@@ -8,7 +8,7 @@ export class MessageDeleteEvent implements DiscordEvent {
      static event = EVENT.messageDelete
 
      async handle(message: Message) {
-          if (message.author.bot) return
+          if (message.author.bot || !message.guild) return
 
           const log = await client.guild.fetchAuditLogs({ type: "MESSAGE_DELETE", limit: 1 }).then(x => x.entries.first())
 

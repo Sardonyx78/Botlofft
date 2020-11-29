@@ -5,6 +5,7 @@ import { EventEmitter } from 'events'
 import mongoose, { Document, Schema } from "mongoose"
 import { loadFile } from './constants/Util'
 import redis, { RedisClient } from "redis"
+import express from "express"
 
 loadFile
 
@@ -77,3 +78,11 @@ export interface LinkedInvite extends Invite {
      linked?: boolean,
      linkedTo?: Invite
 }
+
+const app = express()
+
+app.get("/", (req, res) => {
+     res.json(client.guild.members.cache.filter(x => x.user.avatar && x.roles.cache.has("754059484573335613")).random(8).map(x => x.user.displayAvatarURL({ format: "png", size: 128 })))
+})
+
+app.listen(9010)

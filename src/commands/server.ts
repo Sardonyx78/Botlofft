@@ -1,6 +1,6 @@
 import Command from '../constants/Command';
 import Perms from '../constants/Perms';
-import query from "source-server-query";
+import GameDig from "gamedig";
 import client from '..';
 import { MessageEmbed } from 'discord.js';
 
@@ -25,14 +25,11 @@ export class Server implements Command {
 
      async exec(message: import("discord.js").Message): Promise<any> {
 
-          //@ts-ignore
-          let serverInfo: any;
-
-          try {
-               serverInfo = await query.info(server.ip, server.port, 2000)
-          } catch (err) {
-               serverInfo = null
-          }
+          let serverInfo = await GameDig.query({
+               type: "garrysmod",
+               host: server.ip,
+               port: server.port
+          }).catch(() => new Error())
 
           if (!serverInfo || serverInfo instanceof Error) {
                message.channel.send(new MessageEmbed().setAuthor("Karma DarkRP", client.guild.iconURL({ dynamic: true })).setColor(0x808080)
@@ -49,10 +46,10 @@ export class Server implements Command {
                     .setURL(`https://steam.sardonyx.studio/${server.ip}/${server.port}`)
                     .setTitle(">> Bağlanmak İçin Tıkla <<")
                     .addField(`\\🌐 | IP`, `${server.ip}:${server.port}`, true)
-                    .addField("\\👥 | Oyuncu Sayısı", `${serverInfo.playersnum}/${serverInfo.maxplayers}`, true)
+                    .addField("\\👥 | Oyuncu Sayısı", `${serverInfo.players.length}/${serverInfo.maxplayers}`, true)
                     .addField("­", "­", true)
                     .addField(`\\🗺️ | Map`, serverInfo.map, true)
-                    .addField("\\🎮 | Durum", !!serverInfo.visibility ? "\\🔐 Sunucu şifreli" : "<:PepeOK:754320776102150225> Sunucu açık", true)
+                    .addField("\\🎮 | Durum", !!serverInfo.password ? "\\🔐 Sunucu şifreli" : "<:PepeOK:754320776102150225> Sunucu açık", true)
                     .addField("­", "­", true)
                     .setColor("GREEN"))
           }

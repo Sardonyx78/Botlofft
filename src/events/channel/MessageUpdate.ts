@@ -8,8 +8,7 @@ export class MessageUpdateEvent implements DiscordEvent {
      static event = EVENT.messageUpdate
 
      handle(o: Message, message: Message) {
-         if (o.author.bot) return
-         if (o.content === message.content) return;
+         if (o.author.bot || !message.guild || o.content === message.content) return
  
          const omsg: string = (() => {
              if (o.content.length > 1000) return '(Çok uzun bi mesaj)' 
