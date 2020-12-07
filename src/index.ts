@@ -82,7 +82,7 @@ export interface LinkedInvite extends Invite {
 const app = express()
 
 app.get("/", (req, res) => {
-     res.json(client.guild.members.cache.filter(x => x.user.avatar).random(8).map(x => x.user.displayAvatarURL({ format: "png", size: 128 })))
+     res.json(client.guild.members.cache.filter(x => !!x.user.avatar).random(8).map(x => x.user.displayAvatarURL({ format: "png", size: 128 })))
 })
 
 app.listen(9010)
