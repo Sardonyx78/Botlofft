@@ -59,5 +59,5 @@ export class Server implements Command {
      };
 }
 
-client.commands.set("server", new Server())
-client.commands.set("sunucu", new Server())
+/*client.commands.set("server", new Server())
+client.commands.set("sunucu", new Server())*/
