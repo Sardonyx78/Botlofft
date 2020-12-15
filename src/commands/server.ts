@@ -5,8 +5,8 @@ import client from '..';
 import { MessageEmbed } from 'discord.js';
 
 const server = {
-     ip: "185.122.202.139",
-     port: 27024
+     ip: "185.122.202.132",
+     port: 27015
 }
 
 export class Server implements Command {
