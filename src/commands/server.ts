@@ -1,6 +1,6 @@
 import Command from '../constants/Command';
 import Perms from '../constants/Perms';
-import GameDig from "gamedig";
+//import GameDig from "gamedig";
 import client from '..';
 import { MessageEmbed } from 'discord.js';
 
@@ -25,7 +25,7 @@ export class Server implements Command {
 
      async exec(message: import("discord.js").Message): Promise<any> {
 
-          let serverInfo = await GameDig.query({
+/*          let serverInfo = await GameDig.query({
                type: "garrysmod",
                host: server.ip,
                port: server.port
@@ -53,6 +53,9 @@ export class Server implements Command {
                     .addField("­", "­", true)
                     .setColor("GREEN"))
           }
+          */
+
+          message.channel.send(new MessageEmbed().setColor("GREEN").setImage("https://cache.gametracker.com/server_info/185.122.202.132:27015/b_560_95_1.png"))
      };
 }
 
